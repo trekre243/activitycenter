@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col s6">
+        <h3>Dojo Activity Center</h3>
+    </div>
+    <div class="col s6 right-align">
+        <a href="/home">Home</a> &nbsp;
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col s8">
+        <h4>@ViewBag.Act.Title</h4>
+    </div>
+    <div class="col s4 right-align">
+        @if(ViewBag.IsParticipant)
+        {
+            <a class="waves-effect waves-light btn" href="/leave/@ViewBag.Act.ActId">Leave</a>
+        }
+        else
+        {
+            <a class="waves-effect waves-light btn" href="/join/@ViewBag.Act.ActId">Join</a>
+        }
+        @if(ViewBag.Act.Coordinator.UserId == ViewBag.UserId)
+        {
+            <a class="waves-effect waves-light btn red" href="/delete/@ViewBag.Act.ActId">Delete</a>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <h5><strong>Event Coordinator:</strong> @ViewBag.Act.Coordinator.Name</h5>
+        <h5>Description</h5>
+        <p>@ViewBag.Act.Description</p>
+        <h5>Participants:</h5>
+        <ul>
+            @foreach(var participant in ViewBag.Act.Participants)
+            {
+                <li>@participant.Participant.Name</li>
+            }
+        </ul>
+    </div>
+</div>

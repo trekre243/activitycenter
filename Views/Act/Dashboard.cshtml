@@ -1,0 +1,63 @@
+@{
+    bool isParticipant(int userId, Act act)
+    {
+        return act.Participants.Any(ap => ap.Participant.UserId == userId);
+    }
+}
+
+<div class="row">
+    <div class="col s6">
+        <h3>Dojo Actvity Center</h3>
+    </div>
+    <div class="col s3">
+        <h5>Welcome, @ViewBag.Name!</h5>
+    </div>
+    <div class="col s3">
+        <h5><a href="/logout">Logout</a></h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Activity</th>
+                    <th>Date and Time</th>
+                    <th>Duration</th>
+                    <th>Event Coordinator</th>
+                    <th>No. of Participants</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var act in ViewBag.Acts)
+                {
+                    <tr>
+                        <td><a href="activity/@act.ActId">@act.Title</a></td>
+                        <td>@act.Date.ToString("M/d") @@ @act.Time.ToString("h:mm")@act.Time.ToString("tt").ToLower()</td>
+                        <td>@act.Duration @act.Units</td>
+                        <td>@act.Coordinator.Name</td>
+                        <td>@act.Participants.Count</td>
+                        @if(act.Coordinator.UserId == ViewBag.UserId)
+                        {
+                            <td><a href="/delete/@act.ActId">Delete</a></td>
+                        }
+                        else if(isParticipant((int)ViewBag.UserId, act))
+                        {
+                            <td><a href="/leave/@act.ActId">Leave</a></td>
+                        }
+                        else
+                        {
+                            <td><a href="/join/@act.ActId">Join</a></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 right-align">
+        <a class="waves-effect waves-light btn" href="/new">Add New Activity</a>
+    </div>
+</div>

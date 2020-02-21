@@ -1,0 +1,64 @@
+@model Act
+<form asp-action="Create" asp-controller="Act">
+<div class="row">
+    <div class="col s6">
+        <h3>Dojo Activity Center</h3>
+    </div>
+    <div class="col s6 right-align">
+        <a href="/home">Home</a> &nbsp;
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <h5>Create an Acivity</h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col s6">
+        <div class="input-field col s12">
+            <input asp-for="Title" type="text">
+            <label asp-for="Title"></label>
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div class="input-field col s12">
+            <input asp-for="Date" type="date">
+            <label asp-for="Date"></label>
+            <span asp-validation-for="Date"></span>
+        </div>
+    </div>
+    <div class="col s6">
+        <div class="input-field col s12">
+            <input asp-for="Time" type="time">
+            <label asp-for="Time"></label>
+            <span asp-validation-for="Time"></span>
+        </div>
+        <div class="input-field col s12">
+            <div class="input-field col s6">
+                <input asp-for="Duration" type="text">
+                <label asp-for="Duration"></label>
+            </div>
+            <div class="col s6">
+                <select asp-for="Units" class="browser-default">
+                    <option value="Hours">Hours</option>
+                    <option value="Minutes">Minutes</option>
+                    <option value="Days">Days</option>
+                </select>
+            </div>
+            <span asp-validation-for="Duration"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <textarea asp-for="Description" class="materialize-textarea"></textarea>
+        <label asp-for="Description"></label>
+        <span asp-validation-for="Description"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <button class="waves-effect waves-light btn" type="submit">Create Activity</button>
+    </div>
+</div>
+</form>
